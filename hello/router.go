@@ -6,7 +6,7 @@ import (
 )
 
 func RegisterHello(router *gin.RouterGroup){
-  router.GET("hello", SayHello)
+  router.GET("/hello", SayHello)
 }
 
 func SayHello(c *gin.Context){
