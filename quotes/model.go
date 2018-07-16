@@ -1,6 +1,9 @@
 package quotes
 
-import "math/rand"
+import (
+	"errors"
+	"math/rand"
+)
 
 type Quote struct {
 	Author        string `json:"author"`
@@ -8,6 +11,14 @@ type Quote struct {
 }
 
 func RandomQuote() Quote {
-	quotes := LoadData()
+	quotes := AllQuotes()
 	return quotes[rand.Intn(len(quotes))]
+}
+
+func QuoteById(id int) (Quote, error) {
+	quotes := AllQuotes()
+	if id >= len(quotes) || id < 0 {
+		return Quote{}, errors.New("Not found!")
+	}
+	return quotes[id], nil
 }
